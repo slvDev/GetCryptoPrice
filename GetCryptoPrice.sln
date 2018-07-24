@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetCryptoPrice", "GetCryptoPrice\GetCryptoPrice.csproj", "{632141B3-5247-4C46-BE57-12DB252FAA36}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{632141B3-5247-4C46-BE57-12DB252FAA36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{632141B3-5247-4C46-BE57-12DB252FAA36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{632141B3-5247-4C46-BE57-12DB252FAA36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{632141B3-5247-4C46-BE57-12DB252FAA36}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D02D1451-EC7A-4604-807C-35FBA34CB5BA}
+	EndGlobalSection
+EndGlobal
