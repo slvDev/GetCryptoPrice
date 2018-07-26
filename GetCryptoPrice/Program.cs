@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Net;
 using System.Threading;
+using System.Text;
+using System.Linq;
 
 namespace GetCryptoPrice
 {
@@ -17,15 +19,31 @@ namespace GetCryptoPrice
             string jsonData = client.DownloadString("https://api.hitbtc.com/api/2/public/ticker/BTCUSD");
 
             //Serialize current info about coin
-            var currentCrypto = new Dictionary<string, string>();
-            var serializer = new JsonSerializer();
-            using (var reader = new StringReader(jsonData))
-            using (var jsonReader = new JsonTextReader(reader))
-            {
-                currentCrypto = serializer.Deserialize<Dictionary<string, string>>(jsonReader);
-            }
+
+            var currentCrypto = JsonConvert.DeserializeObject<Dictionary<string,string>>(jsonData);
+
             Console.WriteLine(currentCrypto["last"]);
+
         }
+
+
+        public static void GetTraddingBalance()
+        {
+            string api = ""; // write here your API key
+            string secretKey = ""; //write here your secret key
+            string convertedTo64 = Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes($"{api}:{secretKey}"));
+
+            WebClient client = new WebClient();
+            client.Headers.Add(HttpRequestHeader.Authorization, $"Basic {convertedTo64}");
+            string jsonData = client.DownloadString("https://api.hitbtc.com/api/2/trading/balance");
+
+            var tBalance = JsonConvert.DeserializeObject<List<Coin>>(jsonData);
+
+            var displayBalance = tBalance.Where(b => b.Available != "0" ).ToList();
+            displayBalance.ForEach(b => Console.WriteLine(b.Available));
+        }
+
+
 
         static void StartTimer(object state)
         {
@@ -35,8 +53,10 @@ namespace GetCryptoPrice
         public static void Main(string[] args)
         {
 
-            Timer timer = new Timer(StartTimer, null, 500, 2000);
+            GetTraddingBalance();
+            Console.WriteLine("-------------------------------");
 
+            Timer timer = new Timer(StartTimer, null, 0, 2000);
             Console.ReadLine();
 
 
