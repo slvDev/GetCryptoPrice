@@ -50,9 +50,9 @@ namespace GetCryptoPrice
             var currentPrice = GetCurrentPrice();
             if (WatchCoin.LastChange < currentPrice)
             {
-                Console.Write("\nPrice up to " + currentPrice);
+                var percentUp = 100 - (WatchCoin.LastChange / currentPrice * 100);
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine(100 - (WatchCoin.LastChange / currentPrice * 100) + " %");
+                Console.WriteLine("\nPrice up to " + currentPrice + " + " + percentUp + " %");
                 Console.ResetColor();
                 WatchCoin.LastChange = currentPrice;
             }
