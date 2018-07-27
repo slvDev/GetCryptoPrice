@@ -49,7 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Balance.cs" />
     <Compile Include="WatchCoin.cs" />
-    <Compile Include="Properties\JsonStringToNumberConverter.cs" />
+    <Compile Include="JsonStringToNumberConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

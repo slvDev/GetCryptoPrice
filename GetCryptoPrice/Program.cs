@@ -77,7 +77,7 @@ namespace GetCryptoPrice
             //GetTraddingBalance();
             Console.WriteLine("-------------------------------");
 
-            Timer timer = new Timer(StartTimer, null, 0, 2000);
+            Timer timer = new Timer(StartTimer, null, 0, 1000);
             Console.ReadLine();
 
 
