@@ -12,7 +12,7 @@ namespace GetCryptoPrice
     class MainClass
     {
 
-        public static void PrintCurrentPrice()
+        public static double GetCurrentPrice()
         {
             var client = new WebClient();
             string jsonData = client.DownloadString("https://api.hitbtc.com/api/2/public/ticker/BTCUSD");
@@ -20,7 +20,7 @@ namespace GetCryptoPrice
             var watchCoin = new WatchCoin();
             watchCoin = JsonConvert.DeserializeObject<WatchCoin>(jsonData);
 
-            Console.WriteLine(watchCoin.Last);
+            return watchCoin.Last;
 
         }
 
@@ -47,13 +47,34 @@ namespace GetCryptoPrice
 
         static void StartTimer(object state)
         {
-            PrintCurrentPrice();
+            var currentPrice = GetCurrentPrice();
+            if (WatchCoin.LastChange < currentPrice)
+            {
+                Console.Write("\nPrice up to " + currentPrice);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(100 - (WatchCoin.LastChange / currentPrice * 100) + " %");
+                Console.ResetColor();
+                WatchCoin.LastChange = currentPrice;
+            }
+            else if (WatchCoin.LastChange > currentPrice)
+            {
+                var percentDown = (WatchCoin.LastChange / currentPrice * 100) - 100;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nPrice down to " + currentPrice + " - " + percentDown + " %");
+                Console.ResetColor();
+                WatchCoin.LastChange = currentPrice;
+            }
+            else
+            {
+                Console.Write("\rBTC current price is " + currentPrice);
+            }
         }
 
         public static void Main(string[] args)
         {
+            WatchCoin.LastChange = GetCurrentPrice();
 
-            GetTraddingBalance();
+            //GetTraddingBalance();
             Console.WriteLine("-------------------------------");
 
             Timer timer = new Timer(StartTimer, null, 0, 2000);

@@ -1,39 +1,52 @@
 ﻿using System;
+using GetCryptoPrice.Properties;
 using Newtonsoft.Json;
+
 
 namespace GetCryptoPrice
 {
     public class WatchCoin
     {
+        public static double LastChange { get; set; }
+
         [JsonProperty("ask")]
-        public string Ask { get; set; }
+        [JsonConverter(typeof(JsonStringToNumberConverter))]
+        public double Ask { get; set; }
 
         [JsonProperty("bid")]
-        public string Bid { get; set; }
+        [JsonConverter(typeof(JsonStringToNumberConverter))]
+        public double Bid { get; set; }
 
         [JsonProperty("last")]
-        public string Last { get; set; }
+        [JsonConverter(typeof(JsonStringToNumberConverter))]
+        public double Last { get; set; }
 
         [JsonProperty("open")]
-        public string Open { get; set; }
+        [JsonConverter(typeof(JsonStringToNumberConverter))]
+        public double Open { get; set; }
 
         [JsonProperty("low")]
-        public string Low { get; set; }
+        [JsonConverter(typeof(JsonStringToNumberConverter))]
+        public double Low { get; set; }
 
         [JsonProperty("high")]
-        public string High { get; set; }
+        [JsonConverter(typeof(JsonStringToNumberConverter))]
+        public double High { get; set; }
 
         [JsonProperty("volume")]
-        public string Volume { get; set; }
+        [JsonConverter(typeof(JsonStringToNumberConverter))]
+        public double Volume { get; set; }
 
         [JsonProperty("volumeQuote")]
-        public string VolumeQuote { get; set; }
+        [JsonConverter(typeof(JsonStringToNumberConverter))]
+        public double VolumeQuote { get; set; }
 
         [JsonProperty("timestamp")]
         public DateTimeOffset Timestamp { get; set; }
 
         [JsonProperty("symbol")]
         public string Symbol { get; set; }
+
 
     }
 }
