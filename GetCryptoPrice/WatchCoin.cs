@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace GetCryptoPrice
 {
-    public class Coin
-    { 
-        [JsonProperty("currency")]
-        public string Currency { get; set; }
-        [JsonProperty("available")]
-        public string Available { get; set; }
-        [JsonProperty("reserved")]
-        public string Reserved { get; set; }
-    }
-
     public class WatchCoin
     {
         [JsonProperty("ask")]
@@ -45,6 +34,6 @@ namespace GetCryptoPrice
 
         [JsonProperty("symbol")]
         public string Symbol { get; set; }
-    }
 
+    }
 }

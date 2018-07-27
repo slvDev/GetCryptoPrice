@@ -14,15 +14,13 @@ namespace GetCryptoPrice
 
         public static void PrintCurrentPrice()
         {
-            //Create webclient for GET request
             var client = new WebClient();
             string jsonData = client.DownloadString("https://api.hitbtc.com/api/2/public/ticker/BTCUSD");
 
-            //Serialize current info about coin
+            var watchCoin = new WatchCoin();
+            watchCoin = JsonConvert.DeserializeObject<WatchCoin>(jsonData);
 
-            var currentCrypto = JsonConvert.DeserializeObject<Dictionary<string,string>>(jsonData);
-
-            Console.WriteLine(currentCrypto["last"]);
+            Console.WriteLine(watchCoin.Last);
 
         }
 
@@ -37,10 +35,12 @@ namespace GetCryptoPrice
             client.Headers.Add(HttpRequestHeader.Authorization, $"Basic {convertedTo64}");
             string jsonData = client.DownloadString("https://api.hitbtc.com/api/2/trading/balance");
 
-            var tBalance = JsonConvert.DeserializeObject<List<Coin>>(jsonData);
+            var tBalance = new Ballance();
+            tBalance.Coins = JsonConvert.DeserializeObject<List<Coin>>(jsonData);
 
-            var displayBalance = tBalance.Where(b => b.Available != "0" ).ToList();
+            var displayBalance = tBalance.Coins.Where(b => b.Available != "0" ).ToList();
             displayBalance.ForEach(b => Console.WriteLine(b.Available));
+
         }
 
 
